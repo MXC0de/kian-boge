@@ -1,14 +1,672 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kian boge</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-</head>
-<body style="background-color: green;">
-<a href="home.html"><button type="button" class="btn btn-danger">kian boge</button></a>
+<!doctype html>
+<html lang="fa" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ارائه درس فارسی پایه نهم</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazir', 'Tahoma', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100%;
+            color: #e0e6ed;
+        }
 
+        * {
+            box-sizing: border-box;
+        }
 
-</body>
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 2.5em;
+            margin: 0 0 15px 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            color: #f0f8ff;
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        /* Meaning Display Area */
+        .meaning-display {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            min-height: 120px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-right: 5px solid #ffd93d;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 217, 61, 0.3);
+        }
+
+        .meaning-display.active {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .meaning-title {
+            color: #ffd93d;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meaning-content {
+            color: #e2e8f0;
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .meaning-content strong {
+            color: #ffd93d;
+            font-weight: 600;
+        }
+
+        .meaning-content ul {
+            margin: 15px 0;
+            padding-right: 20px;
+        }
+
+        .meaning-content li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .default-message {
+            color: #cbd5e0;
+            font-style: italic;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        /* Paragraphs Container */
+        .paragraphs-container {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .paragraphs-title {
+            color: #ff6b6b;
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.3);
+            padding-bottom: 15px;
+        }
+
+        /* Paragraph Styles */
+        .paragraph {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .paragraph::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: #4ecdc4;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .paragraph:hover {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            border-color: #4ecdc4;
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        .paragraph:hover::before {
+            transform: scaleY(1);
+        }
+
+        .paragraph.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            border-color: #ff6b6b;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .paragraph.active::before {
+            transform: scaleY(1);
+            background: #ffd93d;
+        }
+
+        .paragraph-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #e2e8f0;
+            text-align: justify;
+            margin: 0;
+        }
+
+        .paragraph-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #ffd93d 0%, #ffb347 100%);
+            color: #2d3748;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9em;
+            box-shadow: 0 2px 8px rgba(255, 217, 61, 0.3);
+        }
+
+        /* Click Instruction */
+        .instruction {
+            text-align: center;
+            color: #ffd93d;
+            font-size: 1em;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(255, 217, 61, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            border-radius: 10px;
+            border: 1px dashed #4ecdc4;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 25px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1.1em;
+            }
+
+            .meaning-display {
+                padding: 20px;
+            }
+
+            .paragraphs-container {
+                padding: 25px;
+            }
+
+            .paragraph {
+                padding: 20px;
+                padding-left: 50px;
+            }
+
+            .paragraph-text {
+                font-size: 1em;
+            }
+        }
+
+        /* Arayeh Ekhlas Styles */
+        .arayeh-content {
+            margin-bottom: 20px;
+        }
+
+        .arayeh-definition,
+        .arayeh-features,
+        .arayeh-example {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-right: 4px solid #4ecdc4;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+        }
+
+        .arayeh-content h3 {
+            color: #4ecdc4;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .arayeh-content p {
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 15px;
+            color: #e2e8f0;
+        }
+
+        .arayeh-content ul {
+            margin: 15px 0;
+            padding-right: 20px;
+        }
+
+        .arayeh-content li {
+            margin: 10px 0;
+            line-height: 1.7;
+            color: #e2e8f0;
+        }
+
+        .example-verse {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+            border: 2px solid rgba(255, 217, 61, 0.3);
+        }
+
+        .verse-text {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.8;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .example-explanation {
+            margin-top: 15px;
+        }
+
+        .example-explanation p {
+            margin-bottom: 12px;
+        }
+
+        /* Animation for meaning display */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .meaning-display.show-animation {
+            animation: fadeInUp 0.5s ease;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container"><!-- Header -->
+   <div class="header">
+    <div style="font-size: 1.5em; color: #667eea; margin-bottom: 20px; font-weight: 600;">
+     بسم الله الرحمن الرحیم
+    </div>
+    <h1 id="lesson-title">غزل حافظ - درس فارسی پایه نهم</h1>
+    <p id="lesson-subtitle"></p>
+    <div style="margin-top: 20px; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px; font-size: 1em; color: #555;"><strong>تهیه‌کنندگان:</strong> محمد احمدی، آریو ولد بیگی، آلان رسول آبادی
+    </div>
+   </div><!-- Arayeh Ekhlas Section -->
+   <div class="paragraphs-container">
+    <h2 class="paragraphs-title">آرایه اخلاص (تخلص)</h2>
+    <div class="arayeh-content">
+     <div class="arayeh-definition">
+      <h3>🎭 تعریف آرایه اخلاص (تخلص):</h3>
+      <p>وقتی شاعری برای خود یک اسم هنری انتخاب می‌کند و از آن در شعرهایش به کار می‌برد، یعنی برای خود تخلص انتخاب کرده است. تخلص بیشتر در بیت‌های پایانی دیده می‌شود. این آرایه باعث می‌شود شاعر با هویت هنری خود در شعر حضور یابد.</p>
+     </div>
+     <div class="arayeh-features">
+      <h3>🔹 ویژگی‌های تخلص:</h3>
+      <ul>
+       <li><strong>هویت هنری:</strong> شاعر با نام مستعار خود شناخته می‌شود</li>
+       <li><strong>موقعیت در شعر:</strong> معمولاً در بیت پایانی (مقطع) آورده می‌شود</li>
+       <li><strong>ارتباط با مضمون:</strong> گاهی با محتوای شعر پیوند دارد</li>
+       <li><strong>امضای شاعر:</strong> مانند امضای شاعر در پایان اثر است</li>
+      </ul>
+     </div>
+     <div class="arayeh-example">
+      <h3>📝 مثال کامل از حافظ:</h3>
+      <div class="example-verse">
+       <p class="verse-text">«حافظا در کنج فقر و خلوت شب‌های تار / تا بود وردت دعا و درس قرآن غم مخور»</p>
+      </div>
+      <div class="example-explanation">
+       <p><strong>توضیح:</strong> در این بیت که مقطع غزل است، حافظ از تخلص خود یعنی "حافظ" استفاده کرده است. این کلمه هم نام شاعر است و هم به معنای "حافظ قرآن" می‌باشد که با مضمون بیت (دعا و درس قرآن) ارتباط دارد.</p>
+       <p><strong>نکته مهم:</strong> تخلص "حافظ" در بیت پایانی غزل آمده و نشان‌دهنده هویت مذهبی و ادبی شاعر است. این تخلص در اکثر غزل‌های حافظ در بیت آخر دیده می‌شود.</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Paragraphs Container -->
+   <div class="paragraphs-container">
+    <h2 class="paragraphs-title">متن غزل</h2>
+    <div class="instruction">
+     💡 برای مشاهده شرح و تفسیر، روی هر بیت کلیک کنید
+    </div><!-- Meaning Display Area -->
+    <div class="meaning-display" id="meaning-display">
+     <div class="meaning-title" id="meaning-title"><span>📖</span> <span>شرح بیت</span>
+     </div>
+     <div class="meaning-content" id="meaning-content">
+      <div class="default-message">
+       روی هر بیت کلیک کنید تا شرح و تفسیر آن در اینجا نمایش داده شود
+      </div>
+     </div>
+    </div>
+    <div class="paragraph" onclick="showMeaning(1)" id="paragraph-1">
+     <div class="paragraph-number">
+      ۱
+     </div>
+     <p class="paragraph-text" id="paragraph-text-1">الا یا ایها الساقی ادر کاساً و ناولها / که عشق آسان نمود اول ولی افتاد مشکل‌ها</p>
+    </div>
+    <div class="paragraph" onclick="showMeaning(2)" id="paragraph-2">
+     <div class="paragraph-number">
+      ۲
+     </div>
+     <p class="paragraph-text" id="paragraph-text-2">به بوی نافه‌ای کاخر صبا زان طره بگشاید / ز تاب جعد او چون دل به صبری خوش نمی‌آید</p>
+    </div>
+    <div class="paragraph" onclick="showMeaning(3)" id="paragraph-3">
+     <div class="paragraph-number">
+      ۳
+     </div>
+     <p class="paragraph-text" id="paragraph-text-3">دور گردون گر دو روزی بر مراد ما نرفت / دائماً یکسان نباشد حال دوران غم مخور</p>
+    </div>
+    <div class="paragraph" onclick="showMeaning(4)" id="paragraph-4">
+     <div class="paragraph-number">
+      ۴
+     </div>
+     <p class="paragraph-text" id="paragraph-text-4">هان مشو نومید چون واقف نه‌ای از سر غیب / باشد اندر پرده، بازی‌های پنهان غم مخور</p>
+    </div>
+    <div class="paragraph" onclick="showMeaning(5)" id="paragraph-5">
+     <div class="paragraph-number">
+      ۵
+     </div>
+     <p class="paragraph-text" id="paragraph-text-5">ای دل ار سیل فنا بنیاد هستی برکند / چون تو را نوح است کشتیبان ز طوفان غم مخور</p>
+    </div>
+    <div class="paragraph" onclick="showMeaning(6)" id="paragraph-6">
+     <div class="paragraph-number">
+      ۶
+     </div>
+     <p class="paragraph-text" id="paragraph-text-6">در بیابان گر به شوق کعبه خواهی زد قدم / سرزنش‌ها گر کند خار مغیلان غم مخور</p>
+    </div>
+    <div class="paragraph" onclick="showMeaning(7)" id="paragraph-7">
+     <div class="paragraph-number">
+      ۷
+     </div>
+     <p class="paragraph-text" id="paragraph-text-7">گر چه منزل بس خطرناک است و مقصد بس بعید / هیچ راهی نیست کآن را نیست پایان غم مخور</p>
+    </div>
+    <div class="paragraph" onclick="showMeaning(8)" id="paragraph-8">
+     <div class="paragraph-number">
+      ۸
+     </div>
+     <p class="paragraph-text" id="paragraph-text-8">حافظا در کنج فقر و خلوت شب‌های تار / تا بود وردت دعا و درس قرآن غم مخور</p>
+    </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            lesson_title: 'غزل یوسف گم گشته - حافظ شیرازی',
+            lesson_subtitle: '',
+            paragraph_1: 'یوسف گم گشته بازآید به کنعان غم مخور / کلبه ی احزان شود روزی گلستان غم مخور',
+            meaning_1: '🔹 **معنی کلی:** یوسف گمشده دوباره به کنعان برمی‌گردد، غصه نخور. خانه غم‌ها روزی گلستان می‌شود، غم نخور.\n\n📚 **معنی کلمات:**\n• یوسف: حضرت یوسف (ع) - نماد زیبایی و معشوق\n• کنعان: سرزمین کنعان - نماد وطن و آرامش\n• کلبه احزان: خانه غم‌ها\n• گلستان: باغ گل - نماد شادی و زیبایی',
+            paragraph_2: 'ای دل غمدیده حالت بِه شود دل بد مکن / وین سر شوریده بازآید به سامان غم مخور',
+            meaning_2: '🔹 **معنی کلی:** ای دل غم‌دیده! حالت بهتر می‌شود، دل بد نکن. این سر آشفته دوباره به نظم برمی‌گردد، غم نخور.\n\n📚 **معنی کلمات:**\n• غمدیده: غم‌زده، اندوهگین\n• بِه: بهتر\n• دل بد مکن: ناامید نشو\n• شوریده: آشفته، پریشان\n• سامان: نظم، ترتیب',
+            paragraph_3: 'دور گردون گر دو روزی بر مراد ما نرفت / دائماً یکسان نباشد حال دوران غم مخور',
+            meaning_3: '🔹 **معنی کلی:** اگر چرخ فلک دو روزی بر مراد ما نرفت، همیشه یکسان نمی‌ماند حال روزگار، غم نخور.\n\n📚 **معنی کلمات:**\n• دور گردون: چرخش آسمان، تقدیر\n• مراد: خواسته، آرزو\n• دائماً: همیشه، پیوسته\n• یکسان: یکنواخت، ثابت\n• دوران: روزگار، زمانه',
+            paragraph_4: 'هان مشو نومید چون واقف نه‌ای از سر غیب / باشد اندر پرده، بازی‌های پنهان غم مخور',
+            meaning_4: '🔹 **معنی کلی:** هان! ناامید نشو چون از اسرار غیب آگاه نیستی، در پرده بازی‌های پنهان است، غم نخور.\n\n📚 **معنی کلمات:**\n• هان: توجه کن، آگاه باش\n• نومید: ناامید، مأیوس\n• واقف: آگاه، مطلع\n• سر غیب: اسرار پنهان\n• بازی‌های پنهان: تدبیرهای مخفی الهی',
+            paragraph_5: 'ای دل ار سیل فنا بنیاد هستی برکند / چون تو را نوح است کشتیبان ز طوفان غم مخور',
+            meaning_5: '🔹 **معنی کلی:** ای دل! اگر سیل فنا بنیاد هستی را برکند، چون تو را نوح کشتیبان است، از طوفان غم نخور.\n\n📚 **معنی کلمات:**\n• سیل فنا: سیلاب نابودی\n• بنیاد هستی: پایه وجود\n• نوح: حضرت نوح (ع) - نماد نجات‌دهنده\n• کشتیبان: ناخدا، راهنما\n• طوفان: توفان، بلا',
+            paragraph_6: 'در بیابان گر به شوق کعبه خواهی زد قدم / سرزنش‌ها گر کند خار مغیلان غم مخور',
+            meaning_6: '🔹 **معنی کلی:** در بیابان اگر با شوق کعبه قدم بزنی، اگر خار مغیلان سرزنش کند، غم نخور.\n\n📚 **معنی کلمات:**\n• بیابان: صحرا - نماد راه سخت\n• شوق: اشتیاق، علاقه شدید\n• کعبه: خانه خدا - نماد هدف مقدس\n• سرزنش: ملامت، عتاب\n• خار مغیلان: خار بیابان - نماد موانع',
+            paragraph_7: 'گر چه منزل بس خطرناک است و مقصد بس بعید / هیچ راهی نیست کآن را نیست پایان غم مخور',
+            meaning_7: '🔹 **معنی کلی:** اگرچه منزل بسیار خطرناک است و مقصد بسیار دور، هیچ راهی نیست که پایان نداشته باشد، غم نخور.\n\n📚 **معنی کلمات:**\n• منزل: مرحله راه، مقام\n• خطرناک: پرخطر، دشوار\n• مقصد: هدف، مراد\n• بعید: دور، دست‌نیافتنی\n• پایان: انتها، خاتمه',
+            paragraph_8: 'حافظا در کنج فقر و خلوت شب‌های تار / تا بود وردت دعا و درس قرآن غم مخور',
+            meaning_8: '🔹 **معنی کلی:** ای حافظ! در گوشه فقر و تنهایی شب‌های تاریک، تا وردت دعا و درس قرآن باشد، غم نخور.\n\n📚 **معنی کلمات:**\n• کنج فقر: گوشه تنگدستی\n• خلوت: تنهایی، انزوا\n• شب‌های تار: شب‌های تاریک\n• ورد: عبادت مداوم\n• درس قرآن: تلاوت و مطالعه قرآن',
+            background_color: '#1a1a2e',
+            surface_color: '#2d3748',
+            text_color: '#e2e8f0',
+            primary_action_color: '#ff6b6b',
+            secondary_action_color: '#4ecdc4',
+            font_family: 'Vazir',
+            font_size: 16
+        };
+
+        let currentActiveParagraph = null;
+
+        function showMeaning(paragraphNumber) {
+            // Remove active class from all paragraphs
+            document.querySelectorAll('.paragraph').forEach(p => p.classList.remove('active'));
+            
+            // Add active class to clicked paragraph
+            const clickedParagraph = document.getElementById(`paragraph-${paragraphNumber}`);
+            clickedParagraph.classList.add('active');
+            currentActiveParagraph = paragraphNumber;
+
+            // Get the meaning from config
+            const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+            const meaning = config[`meaning_${paragraphNumber}`] || defaultConfig[`meaning_${paragraphNumber}`];
+            
+            // Update meaning display
+            const meaningDisplay = document.getElementById('meaning-display');
+            const meaningTitle = document.getElementById('meaning-title');
+            const meaningContent = document.getElementById('meaning-content');
+            
+            meaningTitle.innerHTML = `<span>📖</span><span>معنی بیت ${paragraphNumber}</span>`;
+            
+            // Format the meaning text with proper HTML
+            const formattedMeaning = meaning
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n•/g, '<br>•')
+                .replace(/\n/g, '<br>');
+            
+            meaningContent.innerHTML = `<p>${formattedMeaning}</p>`;
+            
+            // Add animation classes
+            meaningDisplay.classList.add('active', 'show-animation');
+            
+            // Remove animation class after animation completes
+            setTimeout(() => {
+                meaningDisplay.classList.remove('show-animation');
+            }, 500);
+
+            // Scroll to meaning display
+            meaningDisplay.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        async function onConfigChange(config) {
+            const baseFont = config.font_family || defaultConfig.font_family;
+            const baseFontStack = 'Tahoma, sans-serif';
+            const customFont = `${baseFont}, ${baseFontStack}`;
+            const baseSize = config.font_size || defaultConfig.font_size;
+            
+            document.body.style.fontFamily = customFont;
+            
+            // Update title and subtitle
+            document.getElementById('lesson-title').textContent = config.lesson_title || defaultConfig.lesson_title;
+            document.getElementById('lesson-title').style.fontSize = `${baseSize * 1.6}px`;
+            
+            document.getElementById('lesson-subtitle').textContent = config.lesson_subtitle || defaultConfig.lesson_subtitle;
+            document.getElementById('lesson-subtitle').style.fontSize = `${baseSize * 1.1}px`;
+            
+            // Update paragraphs
+            for (let i = 1; i <= 8; i++) {
+                const paragraphElement = document.getElementById(`paragraph-text-${i}`);
+                if (paragraphElement) {
+                    paragraphElement.textContent = config[`paragraph_${i}`] || defaultConfig[`paragraph_${i}`];
+                    paragraphElement.style.fontSize = `${baseSize * 1.1}px`;
+                }
+            }
+            
+            // Update meaning if currently displayed
+            if (currentActiveParagraph) {
+                const meaning = config[`meaning_${currentActiveParagraph}`] || defaultConfig[`meaning_${currentActiveParagraph}`];
+                document.getElementById('meaning-content').innerHTML = `<div>${meaning}</div>`;
+            }
+            
+            // Apply colors
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+            
+            document.body.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, #16213e 50%, #0f3460 100%)`;
+            
+            document.querySelectorAll('.header').forEach(el => {
+                el.style.background = `linear-gradient(135deg, ${primaryActionColor} 0%, ${secondaryActionColor} 100%)`;
+            });
+            
+            document.querySelectorAll('.paragraphs-container').forEach(el => {
+                el.style.background = `linear-gradient(135deg, ${surfaceColor} 0%, #4a5568 100%)`;
+            });
+            
+            document.querySelector('.meaning-display').style.background = `linear-gradient(135deg, ${surfaceColor} 0%, #4a5568 100%)`;
+            document.querySelector('.meaning-display').style.borderRightColor = '#ffd93d';
+            
+            document.querySelectorAll('.header h1').forEach(el => {
+                el.style.color = '#ffffff';
+            });
+            
+            document.querySelectorAll('.meaning-title, .paragraphs-title').forEach(el => {
+                el.style.color = primaryActionColor;
+            });
+            
+            document.querySelectorAll('.paragraph-number').forEach(el => {
+                el.style.background = `linear-gradient(135deg, #ffd93d 0%, #ffb347 100%)`;
+                el.style.color = '#2d3748';
+            });
+            
+            document.querySelectorAll('.paragraph').forEach(el => {
+                el.style.background = `linear-gradient(135deg, #4a5568 0%, ${surfaceColor} 100%)`;
+                el.style.borderColor = `rgba(78, 205, 196, 0.3)`;
+            });
+            
+            document.querySelectorAll('p, .meaning-content, .paragraph-text').forEach(el => {
+                el.style.color = textColor;
+            });
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.surface_color || defaultConfig.surface_color,
+                            set: (value) => {
+                                config.surface_color = value;
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                            set: (value) => {
+                                config.primary_action_color = value;
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                            set: (value) => {
+                                config.secondary_action_color = value;
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: {
+                        get: () => config.font_family || defaultConfig.font_family,
+                        set: (value) => {
+                            config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    },
+                    fontSizeable: {
+                        get: () => config.font_size || defaultConfig.font_size,
+                        set: (value) => {
+                            config.font_size = value;
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ['lesson_title', config.lesson_title || defaultConfig.lesson_title],
+                    ['lesson_subtitle', config.lesson_subtitle || defaultConfig.lesson_subtitle],
+                    ['paragraph_1', config.paragraph_1 || defaultConfig.paragraph_1],
+                    ['meaning_1', config.meaning_1 || defaultConfig.meaning_1],
+                    ['paragraph_2', config.paragraph_2 || defaultConfig.paragraph_2],
+                    ['meaning_2', config.meaning_2 || defaultConfig.meaning_2],
+                    ['paragraph_3', config.paragraph_3 || defaultConfig.paragraph_3],
+                    ['meaning_3', config.meaning_3 || defaultConfig.meaning_3],
+                    ['paragraph_4', config.paragraph_4 || defaultConfig.paragraph_4],
+                    ['meaning_4', config.meaning_4 || defaultConfig.meaning_4],
+                    ['paragraph_5', config.paragraph_5 || defaultConfig.paragraph_5],
+                    ['meaning_5', config.meaning_5 || defaultConfig.meaning_5],
+                    ['paragraph_6', config.paragraph_6 || defaultConfig.paragraph_6],
+                    ['meaning_6', config.meaning_6 || defaultConfig.meaning_6],
+                    ['paragraph_7', config.paragraph_7 || defaultConfig.paragraph_7],
+                    ['meaning_7', config.meaning_7 || defaultConfig.meaning_7],
+                    ['paragraph_8', config.paragraph_8 || defaultConfig.paragraph_8],
+                    ['meaning_8', config.meaning_8 || defaultConfig.meaning_8]
+                ])
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            onConfigChange(defaultConfig);
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999cd1c046c1f5e7',t:'MTc2MjM1MDYxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
